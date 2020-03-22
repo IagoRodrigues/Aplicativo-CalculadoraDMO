@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import br.edu.ifsp.arq.dmos5_2020s1.calculadoradmo.R;
+import br.edu.ifsp.arq.dmos5_2020s1.calculadoradmo.constants.Constantes;
+import br.edu.ifsp.arq.dmos5_2020s1.calculadoradmo.model.Calculadora;
 
 public class CalculadoraActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,6 +32,11 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
     private Button tecla_subtracaoButton;
     private Button tecla_divisaoButton;
     private Button tecla_multiplicacaoButton;
+    private Button tecla_pontoButton;
+
+    /*Outros*/
+    private int oper;
+    private Calculadora c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
         tecla_subtracaoButton = findViewById(R.id.button_subtracao);
         tecla_divisaoButton = findViewById(R.id.button_divisao);
         tecla_multiplicacaoButton = findViewById(R.id.button_multiplicacao);
+        tecla_pontoButton = findViewById(R.id.button_ponto);
 
         /*Comportamento on click*/
         tecla_0Button.setOnClickListener(this);
@@ -76,34 +84,78 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
         tecla_subtracaoButton.setOnClickListener(this);
         tecla_divisaoButton.setOnClickListener(this);
         tecla_multiplicacaoButton.setOnClickListener(this);
+        tecla_pontoButton.setOnClickListener(this);
+
+        oper= Constantes.NULO;
+        c = inicializar();
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.button_c:
-                //instrução
-                break;
+        try {
+            switch(v.getId()){
+                case R.id.button_c:
+                    clear(c);
+                    break;
 
-            case R.id.button_igual:
-                //instrução
-                break;
+                case R.id.button_igual:
+                    telaTextView.setText(geraResultado());
+                    break;
 
-            case R.id.button_adicao:
-                //instrução
-                break;
+                case R.id.button_adicao:
+                    c.calcular(Constantes.ADICAO, Float.parseFloat(telaTextView.getText().toString()));
+                    telaTextView.setText("");
+                    break;
 
-            case R.id.button_subtracao:
-                //instrução
-                break;
+                case R.id.button_subtracao:
+                    c.calcular(Constantes.SUBTRACAO, Float.parseFloat(telaTextView.getText().toString()));
+                    telaTextView.setText("");
+                    break;
 
-            case R.id.button_divisao:
-                //instrução
-                break;
+                case R.id.button_divisao:
+                    c.calcular(Constantes.DIVISAO, Float.parseFloat(telaTextView.getText().toString()));
+                    telaTextView.setText("");
+                    break;
 
-            case R.id.button_multiplicacao:
-                //instrução
-                break;
+                case R.id.button_multiplicacao:
+                    c.calcular(Constantes.MULTIPLICACAO, Float.parseFloat(telaTextView.getText().toString()));
+                    telaTextView.setText("");
+                    break;
+
+                case R.id.button_ponto:
+                    telaTextView.append(".");
+                    break;
+
+                default:
+                    Button b = (Button)v;
+                    telaTextView.append(b.getText().toString());
+                    break;
+            }
+        }catch (Exception e){
+            telaTextView.setText("ERR");
         }
+    }
+
+    private String geraResultado() {
+        float a = 0;
+        String result = "";
+
+        a = c.calcular(Constantes.NULO, Float.parseFloat(telaTextView.getText().toString()));
+
+        result = String.valueOf(a);
+
+        return result;
+    }
+
+    private Calculadora inicializar() {
+        Calculadora c = Calculadora.getInstance();
+        telaTextView.setText("");
+
+        return c;
+    }
+
+    private void clear(Calculadora c) {
+        c.calcular(0, 0);
+        telaTextView.setText("");
     }
 }
