@@ -90,7 +90,7 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
         tecla_multiplicacaoButton.setOnClickListener(this);
         tecla_potenciaButton.setOnClickListener(this);
         tecla_pontoButton.setOnClickListener(this);
-        
+
         c = inicializar();
     }
 
