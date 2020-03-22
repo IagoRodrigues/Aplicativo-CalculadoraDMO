@@ -26,12 +26,14 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
     private Button tecla_9Button;
 
     private Button tecla_cButton;
+    private Button tecla_ceButton;
     private Button tecla_igualButton;
 
     private Button tecla_adicaoButton;
     private Button tecla_subtracaoButton;
     private Button tecla_divisaoButton;
     private Button tecla_multiplicacaoButton;
+    private Button tecla_potenciaButton;
     private Button tecla_pontoButton;
 
     /*Outros*/
@@ -57,12 +59,14 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
         tecla_9Button = findViewById(R.id.button_nove);
 
         tecla_cButton  = findViewById(R.id.button_c);
+        tecla_ceButton = findViewById(R.id.button_ce);
         tecla_igualButton = findViewById(R.id.button_igual);
 
         tecla_adicaoButton = findViewById(R.id.button_adicao);
         tecla_subtracaoButton = findViewById(R.id.button_subtracao);
         tecla_divisaoButton = findViewById(R.id.button_divisao);
         tecla_multiplicacaoButton = findViewById(R.id.button_multiplicacao);
+        tecla_potenciaButton = findViewById(R.id.button_potencia);
         tecla_pontoButton = findViewById(R.id.button_ponto);
 
         /*Comportamento on click*/
@@ -78,12 +82,14 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
         tecla_9Button.setOnClickListener(this);
 
         tecla_cButton.setOnClickListener(this);
+        tecla_ceButton.setOnClickListener(this);
         tecla_igualButton.setOnClickListener(this);
 
         tecla_adicaoButton.setOnClickListener(this);
         tecla_subtracaoButton.setOnClickListener(this);
         tecla_divisaoButton.setOnClickListener(this);
         tecla_multiplicacaoButton.setOnClickListener(this);
+        tecla_potenciaButton.setOnClickListener(this);
         tecla_pontoButton.setOnClickListener(this);
 
         oper= Constantes.NULO;
@@ -124,6 +130,15 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
 
                 case R.id.button_ponto:
                     telaTextView.append(".");
+                    break;
+
+                case R.id.button_ce:
+                    telaTextView.setText("");
+                    break;
+
+                case R.id.button_potencia:
+                    c.calcular(Constantes.POTENCIACAO, Float.parseFloat(telaTextView.getText().toString()));
+                    telaTextView.setText("");
                     break;
 
                 default:

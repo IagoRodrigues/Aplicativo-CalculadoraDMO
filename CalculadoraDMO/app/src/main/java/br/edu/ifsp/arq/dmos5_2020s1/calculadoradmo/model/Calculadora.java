@@ -42,6 +42,9 @@ public class Calculadora {
                 case Constantes.DIVISAO:
                     memoria /= valor;
                     break;
+                case Constantes.POTENCIACAO:
+                    memoria = (float) Math.pow(memoria, valor);
+                    break;
                 default:
                     break;
             }

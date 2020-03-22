@@ -18,4 +18,6 @@
     <string name="_0">0</string>
     <string name="dot">.</string>
     <string name="equal">=</string>
+    <string name="ce">ce</string>
+    <string name="pow">^</string>
 </resources>
