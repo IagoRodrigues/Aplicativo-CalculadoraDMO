@@ -37,7 +37,6 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
     private Button tecla_pontoButton;
 
     /*Outros*/
-    private int oper;
     private Calculadora c;
 
     @Override
@@ -91,8 +90,7 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
         tecla_multiplicacaoButton.setOnClickListener(this);
         tecla_potenciaButton.setOnClickListener(this);
         tecla_pontoButton.setOnClickListener(this);
-
-        oper= Constantes.NULO;
+        
         c = inicializar();
     }
 
